@@ -1,0 +1,63 @@
+<h1>褒め声を投稿しよう</h1>
+
+<!-- 録音ボタン -->
+<button id="recordButton">録音開始</button>
+<button id="stopButton" disabled>録音停止</button>
+
+<!-- フォーム -->
+<%= form_with model: @praise, local: true, html: { multipart: true, id: "praiseForm" } do |f| %>
+  <%= f.hidden_field :audio, id: "audioInput" %>
+  <%= f.submit "褒める", class: "btn btn-primary" %>
+<% end %>
+
+<h2>褒め声一覧</h2>
+<% @praises.each do |p| %>
+  <p><strong><%= p.user.nickname %>:</strong></p>
+  <%= audio_tag p.audio, controls: true if p.audio.attached? %>
+<% end %>
+
+<script>
+let mediaRecorder;
+let audioChunks = [];
+
+const recordButton = document.getElementById("recordButton");
+const stopButton = document.getElementById("stopButton");
+const audioInput = document.getElementById("audioInput");
+const form = document.getElementById("praiseForm");
+
+recordButton.onclick = async () => {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = new MediaRecorder(stream);
+  mediaRecorder.start();
+  audioChunks = [];
+
+  mediaRecorder.ondataavailable = e => {
+    audioChunks.push(e.data);
+  };
+
+  recordButton.disabled = true;
+  stopButton.disabled = false;
+};
+
+stopButton.onclick = () => {
+  mediaRecorder.stop();
+  mediaRecorder.onstop = () => {
+    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+
+    // ActiveStorage用にFileオブジェクトを作ってformにセット
+    const file = new File([audioBlob], "praise.wav", { type: 'audio/wav' });
+
+    // Railsフォームにセット
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    audioInput.files = dataTransfer.files;
+
+    form.submit();
+  };
+
+  recordButton.disabled = false;
+  stopButton.disabled = true;
+};
+</script>
+
+

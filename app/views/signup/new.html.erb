@@ -1,0 +1,12 @@
+<h1>ユーザー登録</h1>
+
+<%= form_with model: @user, url: signup_index_path, local: true do |f| %>
+  <div>
+    <%= f.label :nickname, "ニックネーム" %><br>
+    <%= f.text_field :nickname %>
+  </div>
+
+  <div>
+    <%= f.submit "登録する", class: "btn btn-primary" %>
+  </div>
+<% end %>
