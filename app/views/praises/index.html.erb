@@ -6,7 +6,7 @@
 
 <!-- フォーム -->
 <%= form_with model: @praise, local: true, html: { multipart: true, id: "praiseForm" } do |f| %>
-  <%= f.hidden_field :audio, id: "audioInput" %>
+  <%= f.file_field :audio, id: "audioInput" %>
   <%= f.submit "褒める", class: "btn btn-primary" %>
 <% end %>
 
