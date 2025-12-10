@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "pages/top"
   get "pages/about"
   resources :signup, only: [:new, :create]
-  resources :praises, only: [:index, :create]
+  resources :praises, only: [:index, :create, :destroy]
 
 
   root "pages#top"

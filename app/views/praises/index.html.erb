@@ -6,15 +6,32 @@
 
 <!-- フォーム -->
 <%= form_with model: @praise, local: true, html: { multipart: true, id: "praiseForm" } do |f| %>
-  <%= f.file_field :audio, id: "audioInput" %>
-  <%= f.submit "褒める", class: "btn btn-primary" %>
+  <%= f.file_field :audio, id: "audioInput", style: "display:none;" %>
 <% end %>
 
 <h2>褒め声一覧</h2>
+
 <% @praises.each do |p| %>
-  <p><strong><%= p.user.nickname %>:</strong></p>
-  <%= audio_tag p.audio, controls: true if p.audio.attached? %>
+  <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+
+    <p><strong><%= p.user.nickname %>:</strong></p>
+
+    <% if p.audio.attached? %>
+      <%= audio_tag p.audio, controls: true %>
+    <% end %>
+
+    <%# 自分の投稿だけ削除可能にする（任意） %>
+    <% if p.user_id == session[:user_id] %>
+      <%= link_to "削除",
+            praise_path(p),
+            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+            class: "btn btn-danger",
+            style: "margin-top: 5px;" %>
+    <% end %>
+
+  </div>
 <% end %>
+
 
 <script>
 let mediaRecorder;

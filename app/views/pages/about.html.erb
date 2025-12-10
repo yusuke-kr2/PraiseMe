@@ -1,2 +1,39 @@
-<h1>Pages#about</h1>
-<p>Find me in app/views/pages/about.html.erb</p>
+<div class="container" style="max-width: 720px; margin: 40px auto;">
+
+  <h1 class="text-center" style="margin-bottom: 30px;">PraiseMe（俺を褒めろ）とは？</h1>
+
+  <p style="font-size: 1.1em; line-height: 1.8;">
+    PraiseMe は、あなたの“声”で僕を褒めてもらうためのアプリです。<br>
+    ニックネームだけで使えて、褒め声はすべて音声として記録されます。
+  </p>
+
+  <hr>
+
+  <h2 style="margin-top: 25px;">このアプリでできること</h2>
+  <ul style="line-height: 1.8; font-size: 1.05em;">
+    <li>ニックネームだけで簡単登録</li>
+    <li>マイクを使って褒め声を録音</li>
+    <li>投稿した音声は一覧で再生できる</li>
+    <li>自分の褒め声は削除することも可能</li>
+  </ul>
+
+  <hr>
+
+  <h2 style="margin-top: 25px;">使い方</h2>
+
+  <ol style="line-height: 1.8; font-size: 1.05em;">
+    <li>まずニックネームを登録します</li>
+    <li>録音ボタンを押して褒め声を録音</li>
+    <li>録音停止すると自動で投稿されます</li>
+    <li>褒め声一覧でいつでも聞き返せます</li>
+  </ol>
+
+  <hr>
+
+  <div class="text-center" style="margin-top: 40px;">
+    <%= link_to "トップへ戻る", root_path, class: "btn btn-secondary", style: "margin-right: 10px;" %>
+    <%= link_to "登録して始める", new_signup_path, class: "btn btn-primary" %>
+  </div>
+
+</div>
+

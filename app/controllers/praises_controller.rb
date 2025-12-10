@@ -15,6 +15,14 @@ class PraisesController < ApplicationController
     end
   end
 
+  def destroy
+    @praise = @user.praises.find(params[:id])
+    @praise.destroy
+
+    redirect_to praises_path, notice: "投稿を削除しました"
+  end
+
+  
   private
 
   def praise_params
