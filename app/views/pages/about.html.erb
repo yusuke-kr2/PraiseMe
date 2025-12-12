@@ -1,39 +1,38 @@
-<div class="container" style="max-width: 720px; margin: 40px auto;">
+<div class="record-wrapper">
 
-  <h1 class="text-center" style="margin-bottom: 30px;">PraiseMe（俺を褒めろ）とは？</h1>
+  <div class="record-card">
+    <h1 class="record-title">PraiseMe とは？</h1>
 
-  <p style="font-size: 1.1em; line-height: 1.8;">
-    PraiseMe は、あなたの“声”で僕を褒めてもらうためのアプリです。<br>
-    ニックネームだけで使えて、褒め声はすべて音声として記録されます。
-  </p>
+    <p class="about-text">
+      あなたの“声”で僕を褒めてもらうアプリです。<br>
+      ニックネームだけで使えて、褒め声はすべて音声として保存されます。
+    </p>
 
-  <hr>
+    <hr class="about-divider">
 
-  <h2 style="margin-top: 25px;">このアプリでできること</h2>
-  <ul style="line-height: 1.8; font-size: 1.05em;">
-    <li>ニックネームだけで簡単登録</li>
-    <li>マイクを使って褒め声を録音</li>
-    <li>投稿した音声は一覧で再生できる</li>
-    <li>自分の褒め声は削除することも可能</li>
-  </ul>
+    <h1 class="about-heading">このアプリでできること</h1>
+    <ul class="about-list">
+      <li>ニックネームだけで簡単登録</li>
+      <li>録音ボタンを押すだけで褒め声を録音</li>
+      <li>投稿した声は一覧でいつでも再生できる</li>
+      <li>自分の投稿は削除することも可能</li>
+    </ul>
 
-  <hr>
+    <hr class="about-divider">
 
-  <h2 style="margin-top: 25px;">使い方</h2>
+    <h1 class="about-heading">使い方</h1>
+    <ol class="about-list">
+      <li>ニックネームを登録する</li>
+      <li>録音ボタンを押して褒め声を録音する</li>
+      <li>停止すると自動で投稿される</li>
+      <li>褒め声一覧からいつでも聞ける</li>
+    </ol>
 
-  <ol style="line-height: 1.8; font-size: 1.05em;">
-    <li>まずニックネームを登録します</li>
-    <li>録音ボタンを押して褒め声を録音</li>
-    <li>録音停止すると自動で投稿されます</li>
-    <li>褒め声一覧でいつでも聞き返せます</li>
-  </ol>
+    <div class="about-actions">
+      <%= link_to "トップへ戻る", root_path, class: "btn btn-secondary about-btn" %>
+      <%= link_to "登録して始める", new_signup_path, class: "btn btn-primary about-btn" %>
+    </div>
 
-  <hr>
-
-  <div class="text-center" style="margin-top: 40px;">
-    <%= link_to "トップへ戻る", root_path, class: "btn btn-secondary", style: "margin-right: 10px;" %>
-    <%= link_to "登録して始める", new_signup_path, class: "btn btn-primary" %>
   </div>
 
 </div>
-

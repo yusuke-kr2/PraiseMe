@@ -1,9 +1,21 @@
-<h1>PraiseMe</h1>
+<div class="top-wrapper warm-bg d-flex flex-column align-items-center justify-content-center">
 
-<p>あなたの声で僕を褒めるアプリです！</p>
+  <div class="top-card warm-card p-5 text-center">
+    <h1 class="mb-4 fw-bold">PraiseMe</h1>
 
-<div>
-  <%= link_to "登録して始める", new_signup_path, class: "btn btn-primary" %>
-  <%= link_to "アプリの説明を見る", about_path, class: "btn btn-secondary" %>
+    <p class="warm-text mb-4">
+      あなたの「褒め声」をくろちゃんは待っています
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 mt-3">
+      <%= link_to "登録して始める", new_signup_path, class: "warm-btn" %>
+      <%= link_to "アプリの説明を見る", about_path, class: "warm-btn light" %>
+    </div>
+  </div>
+
+  <div class="icon-wrapper mt-5">
+    <%= image_tag "my_icon.jpg", class: "big-icon warm-icon" %>
+  </div>
+
 </div>
 

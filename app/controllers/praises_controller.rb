@@ -2,7 +2,7 @@ class PraisesController < ApplicationController
   before_action :set_user
 
   def index
-    @praises = Praise.includes(:user).order(created_at: :asc)
+    @praises = Praise.includes(:user).order(created_at: :desc)
     @praise = Praise.new
   end
 
@@ -22,7 +22,7 @@ class PraisesController < ApplicationController
     redirect_to praises_path, notice: "投稿を削除しました"
   end
 
-  
+
   private
 
   def praise_params

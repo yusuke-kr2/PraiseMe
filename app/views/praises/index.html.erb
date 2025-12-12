@@ -1,37 +1,48 @@
-<h1>褒め声を投稿しよう</h1>
+<div class="record-wrapper">
 
-<!-- 録音ボタン -->
-<button id="recordButton">録音開始</button>
-<button id="stopButton" disabled>録音停止</button>
+  <div class="record-card">
 
-<!-- フォーム -->
-<%= form_with model: @praise, local: true, html: { multipart: true, id: "praiseForm" } do |f| %>
-  <%= f.file_field :audio, id: "audioInput", style: "display:none;" %>
-<% end %>
+    <h1 class="record-title">褒め声を投稿しよう</h1>
 
-<h2>褒め声一覧</h2>
+    <!-- 録音トグルボタン -->
+    <div class="record-container">
+      <button id="recordToggleButton" class="record-btn">
+        <img id="recordIcon" src="<%= asset_path('my_icon.jpg') %>" class="record-icon">
+      </button>
+      <p id="recordLabel" class="record-label">録音開始</p>
+    </div>
 
-<% @praises.each do |p| %>
-  <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
-
-    <p><strong><%= p.user.nickname %>:</strong></p>
-
-    <% if p.audio.attached? %>
-      <%= audio_tag p.audio, controls: true %>
-    <% end %>
-
-    <%# 自分の投稿だけ削除可能にする（任意） %>
-    <% if p.user_id == session[:user_id] %>
-      <%= link_to "削除",
-            praise_path(p),
-            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-            class: "btn btn-danger",
-            style: "margin-top: 5px;" %>
+    <!-- 録音データ送信フォーム -->
+    <%= form_with model: @praise, local: true, html: { multipart: true, id: "praiseForm" } do |f| %>
+      <%= f.file_field :audio, id: "audioInput", class: "hidden-audio" %>
     <% end %>
 
   </div>
-<% end %>
 
+
+  <div class="record-list-card">
+    <h2 class="record-list-title">褒め声一覧</h2>
+
+    <% @praises.each do |p| %>
+      <div class="record-item">
+
+        <p class="record-nickname"><strong><%= p.user.nickname %> :</strong></p>
+
+        <% if p.audio.attached? %>
+          <%= audio_tag p.audio, controls: true, class: "record-audio" %>
+        <% end %>
+
+        <% if p.user_id == session[:user_id] %>
+          <%= link_to "削除",
+                praise_path(p),
+                data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                class: "delete-btn" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
 
 <script>
 let mediaRecorder;
@@ -60,11 +71,8 @@ stopButton.onclick = () => {
   mediaRecorder.stop();
   mediaRecorder.onstop = () => {
     const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-
-    // ActiveStorage用にFileオブジェクトを作ってformにセット
     const file = new File([audioBlob], "praise.wav", { type: 'audio/wav' });
 
-    // Railsフォームにセット
     const dataTransfer = new DataTransfer();
     dataTransfer.items.add(file);
     audioInput.files = dataTransfer.files;
@@ -76,5 +84,3 @@ stopButton.onclick = () => {
   stopButton.disabled = true;
 };
 </script>
-
-
