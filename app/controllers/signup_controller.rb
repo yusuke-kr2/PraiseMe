@@ -7,7 +7,7 @@ class SignupController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to praises_path, notice: "登録完了！"
+      redirect_to praises_path, success: "登録完了！"
     else
       render :new
     end

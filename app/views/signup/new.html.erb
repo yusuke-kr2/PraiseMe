@@ -3,6 +3,18 @@
 
     <h1 class="signup-title">ユーザー登録</h1>
 
+    <% if @user.errors.any? %>
+  <div class="error-messages">
+    <h2>ニックネームを入力してください:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
     <%= form_with model: @user, url: signup_index_path, local: true do |f| %>
 
       <div class="form-group">
