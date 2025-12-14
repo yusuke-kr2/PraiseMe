@@ -77,4 +77,5 @@ USER 1000:1000
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["bash", "-c", "bundle exec rails db:prepare && bundle exec rails server"]
+
