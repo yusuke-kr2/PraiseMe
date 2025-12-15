@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  slip_before_action :require_login, only: [:index]
+  skip_before_action :require_login
 
   def top
   end
