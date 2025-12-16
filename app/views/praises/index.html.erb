@@ -12,6 +12,12 @@
       <p id="recordLabel" class="record-label">録音開始</p>
     </div>
 
+    <%= link_to "Xでシェア",
+  "https://twitter.com/intent/tweet?text=くろちゃんを褒めたよ",
+  target: "_blank",
+  rel: "noopener" %>
+
+
     <!-- 録音データ送信フォーム -->
     <%= form_with model: @praise, local: true, html: { multipart: true, id: "praiseForm" } do |f| %>
       <%= f.file_field :audio, id: "audioInput", class: "hidden-audio" %>
